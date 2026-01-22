@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SmartKops - Menabung</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-image: url("Picture/green-fluid-shape-frame-design-resource/rm222-mind-07.jpg");
+        background-position: ;
+      }
+      header {
+        background: #4caf50;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+      nav {
+        background: #2e7d32;
+        padding: 0.8rem;
+      }
+      nav a {
+        color: white;
+        margin: 0 1.2rem;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      section {
+        padding: 2.5rem 2rem;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .hero {
+        background: #e8f5e8;
+        text-align: center;
+        padding: 3rem;
+      }
+      .products,
+      .tabungan-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 3fr));
+        gap: 1.5rem;
+      }
+      .product,
+      .tabungan-card,
+      .paket-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+      .product:hover,
+      .tabungan-card:hover,
+      .paket-card:hover {
+        transform: translateY(-5px);
+      }
+      .product img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .price {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #4caf50;
+        margin: 0.5rem 0;
+      }
+      button {
+        background: linear-gradient(135deg, #4caf50, #45a049);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 1rem;
+        margin: 0.3rem;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background: linear-gradient(135deg, #45a049, #2e7d32);
+      }
+      button.danger {
+        background: linear-gradient(135deg, #f44336, #d32f2f);
+      }
+      button.danger:hover {
+        background: linear-gradient(135deg, #d32f2f, #b71c1c);
+      }
+      #cart,
+      #simpanan-detail,
+      #tabung-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border: 2px solid #4caf50;
+        border-radius: 15px;
+        padding: 2rem;
+        width: 90%;
+        max-width: 500px;
+        display: none;
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 999;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 0.8rem;
+        margin: 0.5rem 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+      .saldo-display {
+        background: #e8f5e8;
+        padding: 1rem;
+        border-radius: 10px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2e7d32;
+        text-align: center;
+        margin: 1rem 0;
+      }
+      .history {
+        max-height: 200px;
+        overflow-y: auto;
+        background: #f9f9f9;
+        padding: 1rem;
+        border-radius: 5px;
+      }
+      footer {
+        background: #2e7d32;
+        color: white;
+        text-align: center;
+        padding: 1.5rem;
+      }
+      .hd {
+        background-image: url("Picture/IMG_20260110_071631.jpg");
+        background-size: 90%;
+        background-position: center;
+      }
+      .tab {
+        padding: 20px;
+        border: 0 solid #ddd;
+        transition: transform 0.3s;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0);
+      }
+      @media (max-width: 768px) {
+        nav a {
+          margin: 0 0.5rem;
+          font-size: 0.9rem;
+        }
+        section {
+          padding: 1.5rem 1rem;
+        }
+      }
+      .profil {
+        position: absolute;
+        z-index: 999;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid white;
+        cursor: pointer;
+        transition: 0.3s;
+        right: 15px;
+        top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="coba.html">
+      <img
+        src="Picture/WhatsApp Image 2026-01-12 at 20.35.54.jpeg"
+        class="profil"
+    /></a>
+    <header class="hd">
+      <h1>SMART KOPSIS</h1>
+      <p>Koperasi siswa yang modern dan ramah lingkungan</p>
+    </header>
+    <nav>
+      <a href="index.html">🏠 Beranda</a>
+      <a href="index.html#lt">📖 Latar Belakang</a>
+      <a href="index.html#visi-misi">🎯 Visi Misi</a>
+      <a href="Product.html">🛍️ Produk</a>
+      <a href="menabung.html">💰 Menabung</a>
+      <a href="#cart" id="cartBtn"
+        >🛒 Keranjang (<span id="cartCount">0</span>)</a
+      >
+      <a href="#simpanan" id="simpananBtn"
+        >💳 Saldo (Rp <span id="saldo">0</span>)</a
+      >
+
+    </nav>
+
+    <section id="menabung">
+      <h2>💰 Bagian Menabung Lengkap</h2>
+      <p class="saldo-display">
+        Saldo Saat Ini: Rp <span id="quickSaldo">0</span>
+      </p>
+
+      <h3>📦 Pilih Paket Tabungan</h3>
+      <div class="tabungan-grid">
+        <div class="paket-card">
+          <h3>🌱 Tabungan Harian</h3>
+          <div class="price">Rp 5.000</div>
+          <p>Setiap hari belajar nabung kecil-kecilan</p>
+          <button onclick="openTabungModal(5000, 'Harian')">
+            🚀 Mulai Nabung
+          </button>
+        </div>
+        <div class="paket-card">
+          <h3>📈 Tabungan Mingguan</h3>
+          <div class="price">Rp 25.000</div>
+          <p>Uang saku mingguan jadi produktif</p>
+          <button onclick="openTabungModal(25000, 'Mingguan')">
+            🚀 Mulai Nabung
+          </button>
+        </div>
+        <div class="paket-card">
+          <h3>⭐ Tabungan Bulanan</h3>
+          <div class="price">Rp 100.000</div>
+          <p>Target besar untuk masa depan</p>
+          <button onclick="openTabungModal(100000, 'Bulanan')">
+            🚀 Mulai Nabung
+          </button>
+        </div>
+        <div class="paket-card">
+          <h3>⭐ Tabungan Impian</h3>
+          <div class="price">Min Rp 1</div>
+          <p>Tabung untuk barang impianmu</p>
+          <button onclick="openTabungModal(100000, 'Bulanan')">
+            🚀 Mulai Nabung
+          </button>
+        </div>
+      </div>
+      <div class="tab">
+        <h3>💳 Top Up Saldo</h3>
+<div class="paket-card">
+  <p>Masukkan jumlah top up, lalu sistem akan menunggu persetujuan admin.</p>
+
+  <input type="number" id="topupAmount" placeholder="Min Rp 1.000" min="1000" />
+  <input type="text" id="topupName" placeholder="Nama kamu (opsional)" />
+
+  <button onclick="requestTopUp()">📩 Kirim Request Top Up</button>
+
+  <hr style="margin: 15px 0;" />
+
+  <h4>📌 Status Request Top Up</h4>
+  <div class="history" id="topupHistory"></div>
+</div>
+      </div>
+
+      <div id="overlay" onclick="closeAllModals()"></div>
+      <div id="tabung-modal">
+        <h3 id="modalTitle">Konfirmasi Tabungan</h3>
+        <p id="modalAmount"></p>
+        <input type="text" id="namaTabung" placeholder="Nama kamu (opsional)" />
+        <input
+          type="email"
+          id="emailTabung"
+          placeholder="Email (untuk konfirmasi)"
+        />
+        <select id="metodeTabung">
+          <option value="cash">Tunai di Loket</option>
+          <option value="transfer">Transfer Bank BCA/BNI</option>
+          <option value="gopay">GoPay</option>
+          <option value="dana">DANA</option>
+        </select>
+        <button onclick="confirmTabung()">✅ Konfirmasi & Nabung</button>
+        <button class="danger" onclick="closeTabungModal()">❌ Batal</button>
+      </div>
+    </section>
+
+    <!-- Cart & Simpanan modal sama seperti sebelumnya, tapi dengan style baru -->
+
+    <footer>
+      <p>
+        &copy; 2026 Koperasi Sekolah Smart Surabaya | Dibuat dengan ❤️ untuk
+        siswa Indonesia
+      </p>
+    </footer>
+
+    <script>
+  // =======================
+  // DATA (LOCAL STORAGE)
+  // =======================
+  const LS = {
+    saldo: "sk_saldo",
+    topupRequests: "sk_topup_requests",
+  };
+
+  let saldo = Number(localStorage.getItem(LS.saldo)) || 0;
+  let topupRequests = JSON.parse(localStorage.getItem(LS.topupRequests)) || [];
+
+  function saveAll() {
+    localStorage.setItem(LS.saldo, saldo);
+    localStorage.setItem(LS.topupRequests, JSON.stringify(topupRequests));
+  }
+
+  function rupiah(n) {
+    return "Rp " + Number(n).toLocaleString("id-ID");
+  }
+
+  function uid() {
+    return "REQ-" + Date.now().toString(36).toUpperCase();
+  }
+
+  function nowStr() {
+    return new Date().toLocaleString("id-ID");
+  }
+
+  function updateSaldo() {
+    document.getElementById("saldo").textContent = saldo.toLocaleString("id-ID");
+    document.getElementById("quickSaldo").textContent = saldo.toLocaleString("id-ID");
+  }
+
+  function renderTopupHistory() {
+    const box = document.getElementById("topupHistory");
+    if (!box) return;
+
+    if (topupRequests.length === 0) {
+      box.innerHTML = `<p style="opacity:.7">Belum ada request top up.</p>`;
+      return;
+    }
+
+    box.innerHTML = topupRequests
+      .map((r) => {
+        const badge =
+          r.status === "PENDING"
+            ? "🕒 PENDING"
+            : r.status === "APPROVED"
+            ? "✅ APPROVED"
+            : "❌ REJECTED";
+
+        return `
+          <div style="border:1px solid #ddd;border-radius:10px;padding:10px;margin:10px 0;text-align:left">
+            <b>${badge}</b><br/>
+            <small style="opacity:.7">${r.time}</small><br/>
+            <div>Nama: <b>${r.name}</b></div>
+            <div>Jumlah: <b>${rupiah(r.amount)}</b></div>
+            <div>ID: <code>${r.id}</code></div>
+            ${r.note ? `<div style="margin-top:6px">Catatan Admin: ${r.note}</div>` : ""}
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  // =======================
+  // USER REQUEST TOPUP
+  // =======================
+  function requestTopUp() {
+    const amount = Number(document.getElementById("topupAmount").value);
+    const name = document.getElementById("topupName").value.trim() || "Siswa";
+
+    if (!amount || amount < 1000) {
+      alert("Minimal top up Rp 1.000");
+      return;
+    }
+
+    topupRequests.unshift({
+      id: uid(),
+      name,
+      amount,
+      status: "PENDING",
+      time: nowStr(),
+      note: ""
+    });
+
+    saveAll();
+    renderTopupHistory();
+
+    document.getElementById("topupAmount").value = "";
+    document.getElementById("topupName").value = "";
+
+    alert("✅ Request terkirim! Menunggu admin.");
+  }
+
+  // =======================
+  // TABUNG MODAL (FIX)
+  // =======================
+  function openTabungModal(amount, type) {
+    document.getElementById("modalAmount").textContent =
+      `Jumlah: ${rupiah(amount)} (${type})`;
+    document.getElementById("modalTitle").textContent =
+      `Tabungan ${type}`;
+    document.getElementById("tabung-modal").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+  }
+
+  function confirmTabung() {
+    const text = document.getElementById("modalAmount").textContent;
+    const angka = text.match(/\d[\d.]*/g);
+    const amount = angka ? Number(angka.join("").replace(/\./g, "")) : 0;
+
+    saldo += amount;
+    saveAll();
+    updateSaldo();
+    closeTabungModal();
+    alert(`✅ Berhasil menabung ${rupiah(amount)}!`);
+  }
+
+  function closeTabungModal() {
+    document.getElementById("tabung-modal").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  }
+
+  function closeAllModals() {
+    closeTabungModal();
+  }
+
+  // expose
+  window.requestTopUp = requestTopUp;
+  window.openTabungModal = openTabungModal;
+  window.confirmTabung = confirmTabung;
+  window.closeTabungModal = closeTabungModal;
+  window.closeAllModals = closeAllModals;
+
+  updateSaldo();
+  renderTopupHistory();
+</script>
+
+
+  </body>
+</html>

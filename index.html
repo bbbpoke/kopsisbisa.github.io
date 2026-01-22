@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartKops Smaneba - Beranda</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      * {
+        outline: 0px solid red;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-image: url("Picture/green-fluid-shape-frame-design-resource/rm222-mind-07.jpg");
+        background-position: ;}
+        
+      header {
+        background: #4caf50;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      nav {
+        background: #2e7d32;
+        padding: 0.8rem;
+      }
+      nav a {
+        color: white;
+        margin: 0 1.2rem;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      section {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+      .product {
+        border: 1px solid #ddd;
+        padding: 1rem;
+        text-align: center;
+      }
+      .product img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      .price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #4caf50;
+      }
+      button {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #45a049;
+      }
+      #cart {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: white;
+        border: 1px solid #ddd;
+        padding: 1rem;
+        width: 300px;
+        display: none;
+      }
+      #checkout {
+        background: #2196f3;
+        color: white;
+        padding: 1rem;
+        margin-top: 1rem;
+      }
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+      }
+      @media (max-width: 768px) {
+        .products {
+          grid-template-columns: 1fr;
+        }
+        #cart {
+          width: 90%;
+          right: 5%;
+        }
+        .card {
+          flex-direction: column;
+          text-align: center;
+        }
+        nav a {
+          margin: 0 0.5rem;
+          font-size: 0.9rem;
+        }
+      }
+      .lay h2 {
+        text-align: center;
+        position: relative;
+        font-size: 90px;
+        margin: 0;
+      }
+      .lay img {
+        position: relative;
+        width: 90%;
+        display: block;
+        margin: auto;
+        border-radius: 20px;
+      }
+      .lay p {
+        position: relative;
+        font-size: 30px;
+        text-align: center;
+        display: block;
+        padding: 2rem;
+      }
+      .box {
+        flex: 1;
+        border: 2px solid black;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 1px 4px 10px #333;
+      }
+      .box h2 {
+        margin: 0 0 10px;
+        color: #00b894;
+        font-size: 100px;
+      }
+      .box p {
+        margin: 0;
+        font-size: 1.5rem;
+        line-height: 1.6;
+      }
+      .box ul {
+        margin: 0;
+        font-size: 1.5rem;
+        line-height: 1.6;
+      }
+      .hd {
+        background-image: url("Picture/IMG_20260110_071631.jpg");
+        background-size: cover;
+        background-position: center;
+        opacity: ;
+      }
+      .lt h3 {
+        font-size: 40px;
+      }
+      .lt {
+        text-align: center;
+      }
+      .lt p {
+        font-size: 18px;
+        padding: 30px;
+      }
+      .profil {
+        position: absolute;
+        z-index: 999;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid white;
+        cursor: pointer;
+        transition: 0.3s;
+        right: 15px;
+        top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="coba.html">
+      <img
+        src="Picture/WhatsApp Image 2026-01-12 at 20.35.54.jpeg"
+        class="profil"
+    /></a>
+    <header class="hd">
+      <h1>SMART KOPSIS</h1>
+      <p>Koperasi siswa yang modern dan ramah lingkungan</p>
+    </header>
+    <nav>
+      <a href="index.html">🏠 Beranda</a>
+      <a href="index.html#lt">📖 Latar Belakang</a>
+      <a href="index.html#visi-misi">🎯 Visi Misi</a>
+      <a href="Product.html">🛍️ Produk</a>
+      <a href="menabung.html">💰 Menabung</a>
+      <a href="#cart" id="cartBtn"
+        >🛒 Keranjang (<span id="cartCount">0</span>)</a
+      >
+      <a href="#simpanan" id="simpananBtn"
+        >💳 Saldo (Rp <span id="saldo">0</span>)</a
+      >
+    </nav>
+    <div class="lay">
+      <h2 id="home">SELAMAT DATANG</h2>
+      <p>
+        Selamat Datang Di Smart kopsis SMAN BARENG. Halaman ini menjadi sarana
+        jual beli bagi warga SMAN BARENG yang digunakan untuk berbagai transaksi
+        yang diawasi oleh sekolah
+      </p>
+      <img src="Picture/IMG20260109100452.jpg" alt="Kopsis" />
+    </div>
+    <br /><br />
+
+    <div class="lt">
+      <h3 id="lt">LATAR BELAKANG</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
+        deleniti, totam, accusantium obcaecati quis assumenda tenetur enim,
+        facere et placeat quia maiores. Voluptatem nostrum necessitatibus at
+        quidem neque excepturi illum!
+      </p>
+    </div>
+
+    <section class="vm">
+      <div class="box" id="visi-misi">
+        <h2>Visi</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio nihil
+          accusantium facere porro! Saepe, quibusdam sit? Repellendus iure
+          consequatur similique nobis, necessitatibus recusandae fugit illum
+          quas mollitia vero enim incidunt?
+        </p>
+        <h2>Misi</h2>
+        <ul>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione,
+            recusandae quaerat. Expedita fugit suscipit earum praesentium a
+            ullam dicta, labore aperiam, porro, doloremque pariatur delectus
+            nobis libero minima quibusdam unde?
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
+            aut molestias corrupti facilis exercitationem cupiditate sit
+            excepturi vel, praesentium explicabo nihil provident accusamus illum
+            animi. Optio, nobis at? Autem, obcaecati?
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
+            impedit dicta assumenda saepe atque molestias porro, sunt quisquam
+            neque minus quasi beatae deserunt eligendi debitis at? Laboriosam
+            aperiam earum temporibus.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <footer>
+      <p>
+        &copy; 2026 Koperasi Sekolah Smart SMAN Bareng. Semua hak dilindungi.
+      </p>
+    </footer>
+
+    <script>
+      let cart = [];
+      function addToCart(name, price) {
+          cart.push({name, price});
+          updateCart();
+          alert(${name} ditambahkan ke keranjang!);
+      }
+      function updateCart() {
+          document.getElementById('cartCount').textContent = cart.length;
+          const items = document.getElementById('cartItems');
+          items.innerHTML = cart.map((item, i) => <p>${item.name} - Rp ${item.price} <button onclick="removeItem(${i})">Hapus</button></p>).join('');
+          const total = cart.reduce((sum, item) => sum + item.price, 0);
+          document.getElementById('total').textContent = total;
+      }
+      function removeItem(index) {
+          cart.splice(index, 1);
+          updateCart();
+      }
+      function checkout() {
+          if (cart.length === 0) return alert('Keranjang kosong!');
+          const total = cart.reduce((sum, item) => sum + item.price, 0);
+          alert(Terima kasih! Pesanan berhasil. Total: Rp ${total}. Silakan bayar di loket koperasi.);
+          cart = [];
+          updateCart();
+          closeCart();
+      }
+      document.getElementById('cartBtn').onclick = () => {
+          const cartEl = document.getElementById('cart');
+          cartEl.style.display = cartEl.style.display === 'block' ? 'none' : 'block';
+          updateCart();
+      };
+      function closeCart() {
+          document.getElementById('cart').style.display = 'none';
+      }
+    </script>
+  </body>
+</html>

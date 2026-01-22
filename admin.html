@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin SmartKopsis</title>
+  <style>
+    body{font-family:Arial;padding:20px;background:#f5f5f5}
+    h1{margin-bottom:10px}
+    .card{
+      background:white;padding:15px;border-radius:10px;
+      margin:10px 0;border:1px solid #ddd
+    }
+    button{
+      padding:10px 15px;margin:5px;border:none;border-radius:6px;
+      cursor:pointer;font-weight:bold
+    }
+    .yes{background:#4caf50;color:white}
+    .no{background:#f44336;color:white}
+    input{width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #ddd}
+    .badge{font-weight:bold}
+  </style>
+</head>
+<body>
+
+  <h1>🛡️ Admin Panel - Top Up</h1>
+  <p>Approve / Reject request top up siswa.</p>
+  <a href="menabung.html">⬅️ Kembali ke Menabung</a>
+
+  
+  <hr style="margin:20px 0" />
+  <h2>📦 Data Pembelian (Orders)</h2>
+  <p>Berikut pembelian yang masuk dari fitur Beli Sekarang / Checkout.</p>
+  <button onclick="downloadOrdersExcelAdmin()" style="background:#333;color:#fff;border-radius:8px;padding:10px 15px;border:none;cursor:pointer;font-weight:bold">⬇️ Download Excel (CSV)</button>
+  <div id="ordersBox"></div>
+
+  <h2 style="margin-top:30px">💳 Request Top Up</h2>
+  <div id="requests"></div>
+
+
+<script>
+  const LS = {
+    saldo: "sk_saldo",
+    topupRequests: "sk_topup_requests",
+    orders: "sk_orders",
+  };
+
+  let saldo = Number(localStorage.getItem(LS.saldo)) || 0;
+  let topupRequests = JSON.parse(localStorage.getItem(LS.topupRequests)) || [];
+  let orders = JSON.parse(localStorage.getItem(LS.orders)) || [];
+
+  function saveAll(){
+    localStorage.setItem(LS.saldo, saldo);
+    localStorage.setItem(LS.topupRequests, JSON.stringify(topupRequests));
+  }
+
+  function rupiah(n){
+    return "Rp " + Number(n).toLocaleString("id-ID");
+  }
+
+  function ordersToRows(orders){
+    const rows = [];
+    orders.forEach(o=>{
+      (o.items||[]).forEach(it=>{
+        rows.push({
+          Resi: o.resi || "",
+          OrderID: o.id || "",
+          Waktu: o.time || "",
+          Tipe: o.type || "",
+          Barang: it.name || "",
+          Harga: it.price || 0,
+          Qty: it.qty || 0,
+          Subtotal: (it.price||0) * (it.qty||0),
+          TotalOrder: o.total || 0
+        });
+      });
+    });
+    return rows;
+  }
+
+  function downloadCSV(filename, rows){
+    if(!rows || rows.length===0){
+      alert("Belum ada data pembelian.");
+      return;
+    }
+    const headers = Object.keys(rows[0]);
+    const esc = (v)=>{
+      const s = (v===null||v===undefined) ? "" : String(v);
+      const needs = /[",\n]/.test(s);
+      const out = s.replace(/"/g,'""');
+      return needs ? `"${out}"` : out;
+    };
+    const csv = [headers.join(",")]
+      .concat(rows.map(r => headers.map(h=>esc(r[h])).join(",")))
+      .join("\n");
+    const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadOrdersExcelAdmin(){
+    const rows = ordersToRows(orders);
+    downloadCSV("data-pembelian-resi-smartkopsis.csv", rows);
+  }
+
+  
+  function adminMarkDone(orderId){
+    const o = orders.find(x => x.id === orderId);
+    if(!o) return alert("Order tidak ditemukan!");
+    o.paymentStatus = "DONE";
+    saveAll();
+    renderOrders();
+    alert("✅ Status pembayaran diubah menjadi DONE");
+  }
+
+  function renderOrders(){
+    const box = document.getElementById("ordersBox");
+    if(!box) return;
+
+    if(orders.length === 0){
+      box.innerHTML = "<p style='opacity:.7'>Belum ada pembelian.</p>";
+      return;
+    }
+
+    box.innerHTML = orders.map(o=>{
+      const items = (o.items||[]).map(it=>`<li>${it.name} x ${it.qty} (${rupiah(it.price)})</li>`).join("");
+      return `
+        <div class="card">
+          <div class="badge">🧾 RESI: <code>${o.resi || "-"}</code></div>
+          <small>${o.time || ""}</small>
+          <p>Order ID: <code>${o.id}</code></p>
+          <p>Tipe: <b>${o.type}</b></p>
+          <p>Pembayaran: <b>${o.paymentStatus || 'PENDING'}</b> (${o.method || '-'})</p>
+          <ul>${items}</ul>
+          <p>Total: <b>${rupiah(o.total || 0)}</b></p>
+          ${o.paymentStatus!=='DONE' ? `<button onclick="adminMarkDone('${o.id}')" style="background:#4caf50;color:white;border:none;border-radius:8px;padding:8px 12px;cursor:pointer;font-weight:bold">Set DONE</button>` : ``}
+        </div>
+      `;
+    }).join("");
+  }
+
+  function render(){
+    const box = document.getElementById("requests");
+
+    if(topupRequests.length === 0){
+      box.innerHTML = "<p>Belum ada request.</p>";
+      return;
+    }
+
+    box.innerHTML = topupRequests.map(r => {
+      const status =
+        r.status === "PENDING" ? "🕒 PENDING" :
+        r.status === "APPROVED" ? "✅ APPROVED" : "❌ REJECTED";
+
+      const disabled = r.status !== "PENDING" ? "disabled" : "";
+
+      return `
+        <div class="card">
+          <div class="badge">${status}</div>
+          <small>${r.time}</small>
+          <p>Nama: <b>${r.name}</b></p>
+          <p>Jumlah: <b>${rupiah(r.amount)}</b></p>
+          <p>ID: <code>${r.id}</code></p>
+
+          ${r.status === "PENDING" ? `
+            <input id="note-${r.id}" placeholder="Catatan admin (opsional)" />
+            <button class="yes" onclick="approve('${r.id}')">✅ APPROVE</button>
+            <button class="no" onclick="reject('${r.id}')">❌ REJECT</button>
+          ` : `
+            ${r.note ? `<p>Catatan: ${r.note}</p>` : ""}
+          `}
+        </div>
+      `;
+    }).join("");
+  }
+
+  function approve(id){
+    const req = topupRequests.find(x => x.id === id);
+    if(!req) return alert("Request tidak ditemukan!");
+    if(req.status !== "PENDING") return alert("Request sudah diproses!");
+
+    const note = document.getElementById("note-" + id).value;
+    req.status = "APPROVED";
+    req.note = note;
+
+    saldo += req.amount; // saldo user bertambah
+
+    saveAll();
+    renderOrders();
+  render();
+    alert("✅ Topup approved!");
+  }
+
+  function reject(id){
+    const req = topupRequests.find(x => x.id === id);
+    if(!req) return alert("Request tidak ditemukan!");
+    if(req.status !== "PENDING") return alert("Request sudah diproses!");
+
+    const note = document.getElementById("note-" + id).value;
+    req.status = "REJECTED";
+    req.note = note || "Ditolak admin";
+
+    saveAll();
+    renderOrders();
+  render();
+    alert("❌ Topup rejected!");
+  }
+
+  window.approve = approve;
+  window.reject = reject;
+  window.downloadOrdersExcelAdmin = downloadOrdersExcelAdmin;
+  window.adminMarkDone = adminMarkDone;
+
+  renderOrders();
+  render();
+</script>
+
+</body>
+</html>

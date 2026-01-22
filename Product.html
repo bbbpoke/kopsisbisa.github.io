@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartKops - Produk</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-image: url("Picture/green-fluid-shape-frame-design-resource/rm222-mind-07.jpg");background-position:; }
+        header { background:#4CAF50; color: white; padding: 1rem; text-align: center; position: relative;overflow: hidden; }
+        nav { background: #2E7D32; padding: 0.8rem; }
+        nav a { color: white; margin: 0 1.2rem; text-decoration: none; font-weight: bold; }
+        section { padding: 2rem; max-width: 1200px; margin: auto; }
+        .products { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;}
+        .product { border: 1px solid #959494; padding: 1rem; text-align: center; background-color: white; }
+        .product img { width: 100%; height: 200px; object-fit: cover; }
+        .price { font-size: 1.2rem; font-weight: bold; color: #4CAF50; }
+        button { background: #4CAF50; color: white; border: none; padding: 0.5rem 1rem; cursor: pointer; border-radius: 30px;padding: 10px; margin:5px}
+        button:hover { background: #45a049; }
+        #cart { position: fixed; top: 20px; right: 20px; background: white; border: 1px solid #ddd; padding: 1rem; width: 300px; display: none; }
+        #checkout { background: #2196F3; color: white; padding: 1rem; margin-top: 1rem; }
+        footer { background: #333; color: white; text-align: center; padding: 1rem; }
+        @media (max-width: 768px) { .products { grid-template-columns: repeat(2,1fr); flex-direction: column; } #cart { width: 90%; right: 5%; } nav a { margin: 0 0.5rem; font-size: 0.9rem; }}
+        .hd {background-image: url("Picture/IMG_20260110_071631.jpg"); background-size:90%; background-position: center;}
+        .profil{position: absolute;z-index: 999;width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: 0.3s; right: 15px;top: 10px;}
+  .search-wrap{
+  display:flex;
+  gap:10px;
+  margin: 15px 0 25px;
+}
+.search-wrap input{
+  flex:1;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1rem;
+}
+.search-wrap input:focus{
+  border-color:#4CAF50;
+}
+#clearSearchBtn{
+  border-radius: 10px;
+  padding: 12px 14px;
+  background:#333;
+}
+#clearSearchBtn:hover{
+  background:#111;
+}
+
+    </style>
+</head>
+<body>
+    <a href="coba.html">
+  <img src="Picture/WhatsApp Image 2026-01-12 at 20.35.54.jpeg" class="profil"></a>
+    <header class="hd">
+        <h1>SMART KOPSIS</h1>
+        <p>Koperasi siswa yang modern dan ramah lingkungan</p>
+    </header>
+    <nav>
+      <a href="index.html">🏠 Beranda</a>
+      <a href="index.html#lt">📖 Latar Belakang</a>
+      <a href="index.html#visi-misi">🎯 Visi Misi</a>
+      <a href="Product.html">🛍️ Produk</a>
+      <a href="menabung.html">💰 Menabung</a>
+      <a href="#cart" id="cartBtn"
+        >🛒 Keranjang (<span id="cartCount">0</span>)</a
+      >
+      <a href="#simpanan" id="simpananBtn"
+        >💳 Saldo (Rp <span id="saldo">0</span>)</a
+      >
+    </nav>
+
+    <section id="produk">
+  <h2>Daftar Produk</h2>
+
+  <!-- SEARCH BAR -->
+  <div class="search-wrap">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="🔎 Cari produk..."
+      autocomplete="off"
+    />
+    <button id="clearSearchBtn" type="button">Clear</button>
+  </div>
+
+  <p id="searchInfo" style="margin: 12px 0; opacity: .75;"></p>
+
+  <div class="products" id="productGrid">
+
+            <div class="product">
+                <img src="Picture/buku-tulis-58-lbr-sinar-dunia-emns_600.png" alt="Buku Tulis">
+                <h3>Buku Tulis</h3>
+                <p class="price">Rp 5.000</p>
+               <button onclick="addToCart('Buku Tulis', 5000)">🛒 Tambah Keranjang</button>
+                <button onclick="buyNow('Buku Tulis', 5000)">⚡ Beli Sekarang</button>
+            </div>
+            <div class="product">
+                <img src="Picture/ProductSapipanggang_chitato_68gr.png" alt="Chitato">
+                <h3>Chitato</h3>
+                <p class="price">Rp 3.000</p>
+                <button onclick="addToCart('Buku Tulis', 5000)">🛒 Tambah Keranjang</button>
+                <button onclick="buyNow('Buku Tulis', 5000)">⚡ Beli Sekarang</button>
+            </div>
+            <div class="product">
+                <img src="Picture/no-brand_dasi-sekolah-sd-smp-sma-pramuka_full11.jpg" alt="Dasi">
+                <h3>Dasi</h3>
+                <p class="price">Rp 17.000</p>
+                <button onclick="addToCart('Buku Tulis', 5000)">🛒 Tambah Keranjang</button>
+                <button onclick="buyNow('Buku Tulis', 5000)">⚡ Beli Sekarang</button>
+
+            </div>
+            <div class="product">
+                <img src="Picture/290528.93d9e3f4-2a2c-453a-a666-0925cd08b6d8.NjCc3kUqzN.jpg" alt="Folio">
+                <h3>Folio</h3>
+                <p class="price">Rp 500</p>
+                <button onclick="addToCart('Spidol', 500)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200?text=Spidol" alt="Spidol">
+                <h3>Spidol</h3>
+                <p class="price">Rp 8.000 - Rp 15.000</p>
+                <button onclick="addToCart('Spidol', 12000)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200?text=Spidol" alt="Spidol">
+                <h3>Spidol</h3>
+                <p class="price">Rp 8.000 - Rp 15.000</p>
+                <button onclick="addToCart('Spidol', 12000)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200?text=Spidol" alt="Spidol">
+                <h3>Spidol</h3>
+                <p class="price">Rp 8.000 - Rp 15.000</p>
+                <button onclick="addToCart('Spidol', 12000)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200?text=Spidol" alt="Spidol">
+                <h3>Spidol</h3>
+                <p class="price">Rp 8.000 - Rp 15.000</p>
+                <button onclick="addToCart('Spidol', 12000)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200?text=Spidol" alt="Spidol">
+                <h3>Spidol</h3>
+                <p class="price">Rp 8.000 - Rp 15.000</p>
+                <button onclick="addToCart('Spidol', 12000)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200?text=Spidol" alt="Spidol">
+                <h3>Spidol</h3>
+                <p class="price">Rp 8.000 - Rp 15.000</p>
+                <button onclick="addToCart('Spidol', 12000)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200?text=Spidol" alt="Spidol">
+                <h3>Spidol</h3>
+                <p class="price">Rp 8.000 - Rp 15.000</p>
+                <button onclick="addToCart('Spidol', 12000)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200?text=Spidol" alt="Spidol">
+                <h3>Spidol</h3>
+                <p class="price">Rp 8.000 - Rp 15.000</p>
+                <button onclick="addToCart('Spidol', 12000)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200?text=Spidol" alt="Spidol">
+                <h3>Spidol</h3>
+                <p class="price">Rp 8.000 - Rp 15.000</p>
+                <button onclick="addToCart('Spidol', 12000)">Tambah ke Keranjang</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="cart">
+        <h3>Keranjang Belanja</h3>
+        <div id="cartItems"></div>
+        <div id="checkout">
+            <hr style="margin:10px 0"/>
+            <h4 style="margin:6px 0">🧾 Riwayat Pembayaran</h4>
+            <div id="payHistory" style="max-height:160px;overflow:auto;border:1px solid #eee;border-radius:10px;padding:8px"></div>
+            <hr style="margin:10px 0"/>
+            <p>Total: Rp <span id="total">0</span></p>
+            <button onclick="checkout()">Checkout</button>
+            <button onclick="closeCart()">Tutup</button>
+            <button onclick="downloadOrdersExcel()" style="background:#333;margin-top:10px">⬇️ Download Resi (Excel)</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Koperasi Sekolah Smart SMAN Bareng. Semua hak dilindungi.</p>
+    </footer>
+
+    <!-- ==========================
+         PAYMENT MODAL (Metode Bayar)
+    =========================== -->
+    <div id="payOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:3000" onclick="closePayModal()"></div>
+    <div id="payModal" style="display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:92%;max-width:520px;background:#fff;border-radius:18px;padding:18px 18px 14px;
+      z-index:3001;border:2px solid #4CAF50;box-shadow:0 12px 30px rgba(0,0,0,.25)">
+      <h3 style="margin:0 0 8px">💳 Pilih Metode Pembayaran</h3>
+      <p style="margin:0 0 12px;opacity:.85">Total yang harus dibayar: <b id="payTotalText">Rp 0</b></p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <label style="border:1px solid #ddd;border-radius:12px;padding:12px;cursor:pointer;display:flex;gap:10px;align-items:center">
+          <input type="radio" name="payMethod" value="TABUNGAN" checked />
+          <div><b>Saldo Tabungan</b><br/><small style="opacity:.7">Potong saldo otomatis</small></div>
+        </label>
+        <label style="border:1px solid #ddd;border-radius:12px;padding:12px;cursor:pointer;display:flex;gap:10px;align-items:center">
+          <input type="radio" name="payMethod" value="DANA" />
+          <div><b>DANA</b><br/><small style="opacity:.7">Transfer e-wallet</small></div>
+        </label>
+        <label style="border:1px solid #ddd;border-radius:12px;padding:12px;cursor:pointer;display:flex;gap:10px;align-items:center">
+          <input type="radio" name="payMethod" value="GOPAY" />
+          <div><b>GoPay</b><br/><small style="opacity:.7">Transfer e-wallet</small></div>
+        </label>
+        <label style="border:1px solid #ddd;border-radius:12px;padding:12px;cursor:pointer;display:flex;gap:10px;align-items:center">
+          <input type="radio" name="payMethod" value="SHOPEEPAY" />
+          <div><b>ShopeePay</b><br/><small style="opacity:.7">Transfer e-wallet</small></div>
+        </label>
+        <label style="border:1px solid #ddd;border-radius:12px;padding:12px;cursor:pointer;display:flex;gap:10px;align-items:center">
+          <input type="radio" name="payMethod" value="QRIS" />
+          <div><b>QRIS</b><br/><small style="opacity:.7">Scan QR</small></div>
+        </label>
+      </div>
+
+      <div id="payInfoBox" style="background:#f7f7f7;border:1px dashed #bbb;border-radius:12px;padding:12px;margin-bottom:12px">
+        <b>Instruksi:</b>
+        <div id="payInfo" style="margin-top:6px;opacity:.9"></div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+        <button onclick="confirmPayment()" style="background:#2196F3">✅ Konfirmasi</button>
+        <button onclick="closePayModal()" style="background:#333">Tutup</button>
+      </div>
+      <small style="display:block;margin-top:10px;opacity:.65">
+        Jika memilih e-wallet / QRIS, status akan <b>PENDING</b> sampai kamu menekan tombol <b>Saya Sudah Bayar</b>.
+      </small>
+    </div>
+
+
+    <script>
+  // ==========================
+  // SMARTKOPSIS - CART SYSTEM
+  // ==========================
+  const LS = {
+    saldo: "sk_saldo",
+    cart: "sk_cart",
+    orders: "sk_orders",
+    payments: "sk_payments"
+  };
+
+  let saldo = Number(localStorage.getItem(LS.saldo)) || 0;
+  let cart = JSON.parse(localStorage.getItem(LS.cart)) || [];
+  let orders = JSON.parse(localStorage.getItem(LS.orders)) || [];
+  let payments = JSON.parse(localStorage.getItem(LS.payments)) || [];
+  let currentPay = null;
+
+  function rupiah(n) {
+    return "Rp " + Number(n).toLocaleString("id-ID");
+  }
+
+  function saveAll() {
+    localStorage.setItem(LS.saldo, saldo);
+    localStorage.setItem(LS.cart, JSON.stringify(cart));
+    localStorage.setItem(LS.orders, JSON.stringify(orders));
+    localStorage.setItem(LS.payments, JSON.stringify(payments));
+  }
+
+        
+  // ==========================
+  // RESI & EXPORT (EXCEL/CSV)
+  // ==========================
+  function generateResi(){
+    // Contoh resi: SK-20260120-8F3K1A
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,"0");
+    const day = String(d.getDate()).padStart(2,"0");
+    const rand = Math.random().toString(36).substring(2,8).toUpperCase();
+    return `SK-${y}${m}${day}-${rand}`;
+  }
+
+  function ordersToRows(){
+    // ubah orders jadi baris tabel untuk excel/csv
+    const rows = [];
+    orders.forEach(o=>{
+      (o.items||[]).forEach(it=>{
+        rows.push({
+          Resi: o.resi || "",
+          OrderID: o.id || "",
+          Waktu: o.time || "",
+          Tipe: o.type || "",
+          Barang: it.name || "",
+          Harga: it.price || 0,
+          Qty: it.qty || 0,
+          Subtotal: (it.price||0) * (it.qty||0),
+          TotalOrder: o.total || 0
+        });
+      });
+    });
+    return rows;
+  }
+
+  function downloadCSV(filename, rows){
+    if(!rows || rows.length===0){
+      alert("Belum ada data pembelian.");
+      return;
+    }
+    const headers = Object.keys(rows[0]);
+    const esc = (v)=>{
+      const s = (v===null||v===undefined) ? "" : String(v);
+      const needs = /[",\n]/.test(s);
+      const out = s.replace(/"/g,'""');
+      return needs ? `"${out}"` : out;
+    };
+    const csv = [headers.join(",")]
+      .concat(rows.map(r => headers.map(h=>esc(r[h])).join(",")))
+      .join("\n");
+    const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  
+  // ==========================
+  // PAYMENT SYSTEM (PENDING/DONE)
+  // ==========================
+  function txid(){
+    return "TX-" + Date.now().toString(36).toUpperCase() + "-" + Math.random().toString(36).substring(2,6).toUpperCase();
+  }
+
+  function selectedMethod(){
+    const el = document.querySelector('input[name="payMethod"]:checked');
+    return el ? el.value : "TABUNGAN";
+  }
+
+  function methodInfo(method, total){
+    if(method==="TABUNGAN"){
+      return `Pembayaran menggunakan <b>Saldo Tabungan</b>. Saldo akan dipotong otomatis sebesar <b>${rupiah(total)}</b>.`;
+    }
+    if(method==="QRIS"){
+      return `Silakan scan QRIS di loket koperasi / admin. Setelah bayar, tekan tombol <b>Saya Sudah Bayar</b> (status PENDING).`;
+    }
+    return `Silakan lakukan pembayaran melalui <b>${method}</b>. Setelah transfer, tekan tombol <b>Saya Sudah Bayar</b> (status PENDING).`;
+  }
+
+  function openPayModal(orderDraft){
+    currentPay = orderDraft; // {items,total,type}
+    document.getElementById("payTotalText").textContent = rupiah(orderDraft.total);
+    document.getElementById("payInfo").innerHTML = methodInfo(selectedMethod(), orderDraft.total);
+    document.getElementById("payOverlay").style.display = "block";
+    document.getElementById("payModal").style.display = "block";
+  }
+
+  function closePayModal(){
+    document.getElementById("payOverlay").style.display = "none";
+    document.getElementById("payModal").style.display = "none";
+    currentPay = null;
+  }
+
+  document.addEventListener("change",(e)=>{
+    if(e.target && e.target.name==="payMethod"){
+      if(!currentPay) return;
+      document.getElementById("payInfo").innerHTML = methodInfo(selectedMethod(), currentPay.total);
+    }
+  });
+
+  function renderPayHistory(){
+    const box = document.getElementById("payHistory");
+    if(!box) return;
+    if(payments.length===0){
+      box.innerHTML = "<p style='opacity:.7'>Belum ada transaksi.</p>";
+      return;
+    }
+    box.innerHTML = payments.slice(0,10).map(p=>{
+      const badge = p.status==="PENDING" ? "🕒 PENDING" : "✅ DONE";
+      const btn = p.status==="PENDING"
+        ? `<button onclick="markPaid('${p.txid}')" style="background:#4CAF50;padding:6px 10px;border-radius:10px">Saya Sudah Bayar</button>`
+        : "";
+      return `
+        <div style="border-bottom:1px solid #eee;padding:8px 0">
+          <div><b>${badge}</b> • <small style="opacity:.7">${p.time}</small></div>
+          <div>Metode: <b>${p.method}</b> • Total: <b>${rupiah(p.amount)}</b></div>
+          <div>Resi: <code>${p.resi||"-"}</code></div>
+          ${btn}
+        </div>
+      `;
+    }).join("");
+  }
+
+  function confirmPayment(){
+    if(!currentPay) return;
+    const method = selectedMethod();
+    const total = currentPay.total;
+
+    const order = {
+      id: "ORD-" + Date.now().toString(36).toUpperCase(),
+      resi: generateResi(),
+      time: new Date().toLocaleString("id-ID"),
+      type: currentPay.type,
+      method,
+      paymentStatus: "PENDING",
+      items: currentPay.items,
+      total
+    };
+
+    if(method==="TABUNGAN"){
+      if(saldo < total){
+        alert(`❌ Saldo tabungan tidak cukup.\nSaldo: ${rupiah(saldo)}\nTotal: ${rupiah(total)}`);
+        return;
+      }
+      saldo -= total;
+      order.paymentStatus = "DONE";
+
+      payments.unshift({
+        txid: txid(),
+        orderId: order.id,
+        resi: order.resi,
+        method,
+        amount: total,
+        status: "DONE",
+        time: order.time
+      });
+
+      orders.unshift(order);
+      saveAll();
+      updateSaldoNav();
+      renderPayHistory();
+      closePayModal();
+      alert(`✅ Pembayaran BERHASIL!\nResi: ${order.resi}\nMetode: Saldo Tabungan\nSisa saldo: ${rupiah(saldo)}`);
+      return;
+    }
+
+    payments.unshift({
+      txid: txid(),
+      orderId: order.id,
+      resi: order.resi,
+      method,
+      amount: total,
+      status: "PENDING",
+      time: order.time
+    });
+
+    orders.unshift(order);
+    saveAll();
+    renderPayHistory();
+    closePayModal();
+    alert(`🕒 Pembayaran PENDING!\nResi: ${order.resi}\nMetode: ${method}\nSilakan bayar lalu tekan "Saya Sudah Bayar".`);
+  }
+
+  function markPaid(txid_){
+    const p = payments.find(x=>x.txid===txid_);
+    if(!p) return alert("Transaksi tidak ditemukan!");
+    if(p.status!=="PENDING") return alert("Transaksi sudah DONE!");
+
+    p.status = "DONE";
+    const o = orders.find(x=>x.id===p.orderId);
+    if(o) o.paymentStatus = "DONE";
+
+    saveAll();
+    renderPayHistory();
+    alert(`✅ Pembayaran DONE!\nResi: ${p.resi}`);
+  }
+
+function downloadOrdersExcel(){
+
+    // Excel simple via CSV agar bisa langsung dibuka di Excel
+    const rows = ordersToRows();
+    const filename = "data-pembelian-resi-smartkopsis.csv";
+    downloadCSV(filename, rows);
+  }
+
+
+  function updateSaldoNav() {
+    const saldoEl = document.getElementById("saldo");
+    if (saldoEl) saldoEl.textContent = saldo.toLocaleString("id-ID");
+  }
+
+  function updateCartCount() {
+    const cartCountEl = document.getElementById("cartCount");
+    if (!cartCountEl) return;
+    cartCountEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+  }
+
+  function updateCartUI() {
+    updateCartCount();
+
+    const cartItems = document.getElementById("cartItems");
+    const totalEl = document.getElementById("total");
+    if (!cartItems || !totalEl) return;
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = `<p style="opacity:.7">Keranjang kosong.</p>`;
+      totalEl.textContent = "0";
+      return;
+    }
+
+    cartItems.innerHTML = cart.map((item, i) => `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0;border-bottom:1px solid #eee;padding-bottom:6px">
+        <div>
+          <b>${item.name}</b><br/>
+          <small>${rupiah(item.price)} x ${item.qty}</small>
+        </div>
+        <div>
+          <button onclick="decQty(${i})" style="padding:4px 10px">-</button>
+          <button onclick="incQty(${i})" style="padding:4px 10px">+</button>
+          <button onclick="removeItem(${i})" style="padding:4px 10px;background:#f44336">Hapus</button>
+        </div>
+      </div>
+    `).join("");
+
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    totalEl.textContent = total.toLocaleString("id-ID");
+  }
+
+  // ==========================
+  // CART ACTIONS
+  // ==========================
+  function addToCart(name, price) {
+    const found = cart.find(x => x.name === name && x.price === price);
+    if (found) found.qty += 1;
+    else cart.push({ name, price, qty: 1 });
+
+    saveAll();
+    updateCartUI();
+    renderPayHistory();
+    alert(`✅ ${name} ditambahkan ke keranjang!`);
+  }
+
+  function incQty(index) {
+    cart[index].qty++;
+    saveAll();
+    updateCartUI();
+    renderPayHistory();
+  }
+
+  function decQty(index) {
+    cart[index].qty--;
+    if (cart[index].qty <= 0) cart.splice(index, 1);
+    saveAll();
+    updateCartUI();
+    renderPayHistory();
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    saveAll();
+    updateCartUI();
+    renderPayHistory();
+  }
+
+  // ==========================
+  // BUY NOW (langsung bayar dari saldo)
+  // ==========================
+  function buyNow(name, price) {
+    const total = price;
+    openPayModal({
+      type: "BUY_NOW",
+      items: [{ name, price, qty: 1 }],
+      total
+    });
+  }
+
+  // ==========================
+  // CHECKOUT (bayar semua dari keranjang)
+  // ==========================
+  function checkout() {
+    if (cart.length === 0) {
+      alert("Keranjang kosong!");
+      return;
+    }
+
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const itemsDraft = JSON.parse(JSON.stringify(cart));
+
+    openPayModal({
+      type: "CART_CHECKOUT",
+      items: itemsDraft,
+      total
+    });
+
+    // keranjang dikosongkan setelah konfirmasi
+    cart = [];
+    saveAll();
+    updateCartUI();
+    renderPayHistory();
+    closeCart();
+  }
+
+  // ==========================
+  // CART MODAL TOGGLE
+  // ==========================
+  document.getElementById("cartBtn").onclick = () => {
+    const cartEl = document.getElementById("cart");
+    cartEl.style.display = cartEl.style.display === "block" ? "none" : "block";
+    updateCartUI();
+    renderPayHistory();
+  };
+
+  function closeCart() {
+    document.getElementById("cart").style.display = "none";
+  }
+
+  // expose
+  window.addToCart = addToCart;
+  window.buyNow = buyNow;
+  window.checkout = checkout;
+  window.closeCart = closeCart;
+  window.removeItem = removeItem;
+  window.incQty = incQty;
+  window.decQty = decQty;
+  window.openPayModal = openPayModal;
+  window.closePayModal = closePayModal;
+  window.confirmPayment = confirmPayment;
+  window.markPaid = markPaid;
+  window.downloadOrdersExcel = downloadOrdersExcel;
+
+  // init
+  updateSaldoNav();
+  updateCartUI();
+    renderPayHistory();
+
+  // ==========================
+// PRODUCT SEARCH
+// ==========================
+const searchInput = document.getElementById("searchInput");
+const clearBtn = document.getElementById("clearSearchBtn");
+const productGrid = document.getElementById("productGrid");
+const searchInfo = document.getElementById("searchInfo");
+
+function normalizeText(s){
+  return (s || "")
+    .toString()
+    .toLowerCase()
+    .trim();
+}
+
+function filterProducts(){
+  const q = normalizeText(searchInput.value);
+
+  const productCards = productGrid.querySelectorAll(".product");
+  let visibleCount = 0;
+
+  productCards.forEach(card => {
+    const name = normalizeText(card.querySelector("h3")?.textContent);
+    const price = normalizeText(card.querySelector(".price")?.textContent);
+
+    // cari dari nama & harga
+    const match = name.includes(q) || price.includes(q);
+
+    card.style.display = match ? "block" : "none";
+    if(match) visibleCount++;
+  });
+
+  if(q === ""){
+    searchInfo.textContent = "";
+    return;
+  }
+
+  if(visibleCount === 0){
+    searchInfo.innerHTML = `❌ Produk "<b>${searchInput.value}</b>" tidak ditemukan.`;
+  }else{
+    searchInfo.innerHTML = `✅ Ditemukan <b>${visibleCount}</b> produk untuk "<b>${searchInput.value}</b>".`;
+  }
+}
+
+// realtime search saat ngetik
+searchInput.addEventListener("input", filterProducts);
+
+// tombol clear
+clearBtn.addEventListener("click", () => {
+  searchInput.value = "";
+  filterProducts();
+  searchInput.focus();
+});
+
+// tekan ESC untuk clear
+searchInput.addEventListener("keydown", (e) => {
+  if(e.key === "Escape"){
+    searchInput.value = "";
+    filterProducts();
+  }
+});
+
+// INIT
+filterProducts();
+
+</script>
+
+</body>
+</html>
